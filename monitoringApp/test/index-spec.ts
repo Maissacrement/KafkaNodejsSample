@@ -1,4 +1,4 @@
-import index = require("../src/index");
+import index = require("../src/example/index");
 import * as chai from "chai";
 
 const expect = chai.expect;

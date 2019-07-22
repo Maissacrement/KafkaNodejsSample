@@ -1,5 +1,8 @@
 # KafkaNodejsSample
 
+## Node
+run server : `yarn dev`
+
 ## Start Kafka
 
 ```bash
