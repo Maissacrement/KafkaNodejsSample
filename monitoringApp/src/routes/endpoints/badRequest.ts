@@ -1,6 +1,9 @@
 // App
 const BadRequest = (_: any, res: any) => {
-  res.send("There is nowhere to be found.");
+  return res.status(404).json({
+    message: "Path not found",
+    status: 404
+  });
 };
 
 export default BadRequest;

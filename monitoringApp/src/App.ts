@@ -11,7 +11,7 @@ const app: express.Application = express();
 const PORT = process.env.PORT || 8081;
 
 // My controller
-import routes from './routes/index';
+import routes from "./routes/index";
 
 // Implement CORS
 app.use(cors());
@@ -37,7 +37,7 @@ const header = (_: any, res: any, next: any) => {
 };
 
 const listen = () => {
-  process.stdout.write(`Listening on port ${PORT}!\n`)
+  process.stdout.write(`Listening on port ${PORT}!\n`);
 };
 
 // SET HEADER

@@ -3,8 +3,8 @@ import express = require("express");
 const router: any = express.Router();
 
 // Import Pages
-import BadRequest from './endpoints/badRequest';
+import BadRequest from "./endpoints/badRequest";
 
-router.get("/", BadRequest);
+router.get("/*", BadRequest);
 
 export default router;
