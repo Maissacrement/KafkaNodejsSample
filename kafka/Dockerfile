@@ -12,6 +12,7 @@ ENV KafkaVersion=2.2.0
 ENV KafkaFilename=kafka_2.12-${KafkaVersion}
 ENV KafkaRepo=${DEV_HOME}/kafka/${KafkaFilename}
 ENV KafkaPkgName=${KafkaFilename}.tgz
+ENV KafkaPathConfig=config/server.properties
 # Download Link Env
 ENV KafkaDownloadLink=http://apache.crihan.fr/dist/kafka/${KafkaVersion}/${KafkaPkgName}
 
@@ -28,14 +29,14 @@ RUN wget ${KafkaDownloadLink} && \
     tar -xvf ${KafkaPkgName} && \
     chown -R developer:developer ${KafkaRepo}/ && \
     chmod +x ${KafkaRepo}/bin/* && \
-    apk update && apk add bash
+    apk update && apk add bash tmux
 
 ENV PATH=$PATH:${KafkaRepo}/bin
 
 # CURRENT USER
 USER developer
 
-WORKDIR ${DEV_HOME}/kafka/${KafkaFilename}
+WORKDIR ${DEV_HOME}/kafka/${KafkaFilename}/bin
 
 ENV PATH=$PATH:${KafkaRepo}/bin
 
