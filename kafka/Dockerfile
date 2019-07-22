@@ -15,12 +15,11 @@ ENV KafkaPkgName=${KafkaFilename}.tgz
 # Download Link Env
 ENV KafkaDownloadLink=http://apache.crihan.fr/dist/kafka/${KafkaVersion}/${KafkaPkgName}
 
-# DEV USER
+# CREATE DEV USER
 RUN mkdir -p ${DEV_HOME} ${DEV_HOME}/app && \
     echo "developer:x:${uid}:${gid}:Developer,,,:${DEV_HOME}:/bin/bash" >> /etc/passwd && \
     echo "developer:x:${uid}:" >> /etc/group && \
     chown ${uid}:${gid} -R ${DEV_HOME}/app
-
 
 # WORKSPACE
 WORKDIR ${DEV_HOME}/kafka
@@ -36,6 +35,10 @@ ENV PATH=$PATH:${KafkaRepo}/bin
 # CURRENT USER
 USER developer
 
+WORKDIR ${DEV_HOME}/kafka/${KafkaFilename}
+
 ENV PATH=$PATH:${KafkaRepo}/bin
+
+RUN mkdir /tmp/kafka-logs /tmp/zookeeper
 
 ENTRYPOINT ["/bin/bash"]
