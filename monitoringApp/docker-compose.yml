@@ -1,0 +1,17 @@
+version: "3"
+services:
+  zookeeper:
+    build: ../kafka
+    container_name: "zookeeper"
+    command: ["zookeeper-server-start.sh", "../config/zookeeper.properties"]
+    ports:
+      - 2181:2181
+  kafka_server:
+    build: ../kafka
+    container_name: "kafkaserver"
+    command: ["kafka-server-start.sh", "../config/server.properties"]
+    network_mode: host
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"

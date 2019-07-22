@@ -1,5 +1,7 @@
 # KafkaNodejsSample
 
-# Kafka on alpine
+## Start Kafka
 
-# Nodejs 10 on alpine
+```bash
+  cmd: `docker-compose up --build`
+```
