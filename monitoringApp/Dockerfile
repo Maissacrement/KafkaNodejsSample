@@ -1,5 +1,5 @@
 # Image Location
-FROM node:8.16.0-alpine
+FROM node:10-alpine
 
 # MAINTENER
 MAINTAINER Maissacrement <emmariodelar@gmail.com>
@@ -16,4 +16,4 @@ COPY . .
 
 # ASSIGN PORT AND FUNCTIONNALITY
 EXPOSE 8081
-RUN ["yarn"]
+RUN ["yarn", "test"]

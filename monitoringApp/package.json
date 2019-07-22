@@ -1,0 +1,62 @@
+{
+  "name": "nodetmp",
+  "version": "0.0.0",
+  "description": "nodetmp",
+  "license": "MIT",
+  "repository": "",
+  "author": "",
+  "keywords": [
+    ""
+  ],
+  "files": [
+    "lib"
+  ],
+  "main": "lib/index",
+  "types": "lib/index",
+  "scripts": {
+    "clean": "rimraf lib",
+    "format": "prettier --write \"{src,test}/**/*.ts\"",
+    "lint": "tslint --force --format verbose \"src/**/*.ts\"",
+    "prepublishOnly": "npm run build",
+    "build": "npm run format && npm run clean && npm run lint && echo Using TypeScript && tsc --version && tsc --pretty",
+    "test": "npm run build && mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
+    "coverage": "nyc --include=\"src/**/*.ts\" --reporter=text --reporter=html --reporter=lcov mocha --compilers ts:ts-node/register --recursive \"test/**/*-spec.ts\"",
+    "watch": "npm run build -- --watch",
+    "watch:test": "npm run test -- --watch"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/chai": "^4.1.6",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.11.4",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "nyc": "^13.0.1",
+    "prettier": "^1.14.3",
+    "rimraf": "^2.6.2",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "typescript": "^3.1.1",
+    "coveralls": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src/**/*.ts"
+    ],
+    "exclude": [
+      "lib"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [],
+    "all": true
+  }
+}

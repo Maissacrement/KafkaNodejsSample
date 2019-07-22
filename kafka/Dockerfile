@@ -11,6 +11,8 @@ ENV gid=1000
 ENV KafkaVersion=2.2.0
 ENV KafkaRepo=kafka_2.12-${KafkaVersion}
 ENV KafkaPkgName=${KafkaRepo}.tgz
+# Download Link Env
+ENV KafkaDownloadLink=http://apache.crihan.fr/dist/kafka/${KafkaVersion}/${KafkaPkgName}
 
 # DEV USER
 RUN mkdir -p ${DEV_HOME} ${DEV_HOME}/app && \
@@ -22,7 +24,7 @@ RUN mkdir -p ${DEV_HOME} ${DEV_HOME}/app && \
 # WORKSPACE
 WORKDIR ${DEV_HOME}/kafka
 
-RUN wget http://apache.crihan.fr/dist/kafka/${KafkaVersion}/${KafkaPkgName} && \
+RUN wget ${KafkaDownloadLink} && \
     tar -xvf ${KafkaPkgName}
 
 # CURRENT USER
