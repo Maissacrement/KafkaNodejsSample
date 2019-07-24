@@ -8,7 +8,7 @@ import session = require("express-session");
 const app: express.Application = express();
 
 // Constants
-const PORT = process.env.PORT || 8081;
+const PORT = process.env.PORT || 8082;
 
 // My controller
 import routes from "./routes/index";
@@ -19,8 +19,9 @@ app.use(cors());
 // Session
 app.use(
   session({
-    secret:
-      process.env._SECRET_SESSION || "Stempel is life crypt by Maissacrement"
+    resave: true,
+    saveUninitialized: true,
+    secret: process.env._SECRET_SESSION || "Node kafka by Maissacrement"
   })
 );
 

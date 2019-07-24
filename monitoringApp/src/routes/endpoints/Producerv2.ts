@@ -1,46 +1,72 @@
-const kafka = require('kafka-node'),
-      Producer = kafka.Producer,
-      KeyedMessage = kafka.KeyedMessage,
-      client = new kafka.KafkaClient({kafkaHost: '127.0.0.1:9092'}),
-      producer = new Producer(client),
-      km = new KeyedMessage('key', 'message'),
-      payloads = [
-          { topic: "hello-world", messages: 'hi', partition: 0 },
-          { topic: "hello-world", messages: ['hello', 'world', km] }
-      ];
+import kafka = require("kafka-node");
+const KeyedMessage = kafka.KeyedMessage;
+const Producer = kafka.Producer;
+const client = new kafka.KafkaClient({
+  kafkaHost: "127.0.0.1:9092"
+});
+const producer = new Producer(client);
+const km = new KeyedMessage("key", "message");
+const payloads = [
+  { topic: "hello-world", messages: "hi", partition: 0 },
+  { topic: "hello-world", messages: ["hello", "world", km] }
+];
 
+// Send successfull
 const successfull = (res: any) => {
   return res.status(200).json({
-    status: 200,
-    message: "Message broker successfully send"
+    message: "Message broker successfully send",
+    status: 200
   });
-}
-
-const sendTopic = (_: any, res: any) => {
-  producer.send(payloads, function (err: any, data: any) {
-    if (err) throw new Error(err);
-
-    console.log(data);
-    successfull(res);
-  });
-}
+};
 
 // Test create manually topic
-const topicsToCreate: any = [{
-  topic: "hello-world3",
-  partitions: 3,
-  replicationFactor: 1,
-  messages: 'hi'
-}];
+const topicsToCreate: any = [
+  {
+    messages: "hi",
+    partitions: 3,
+    replicationFactor: 1,
+    topic: "sql"
+  },
+  {
+    messages: "hi",
+    partitions: 3,
+    replicationFactor: 1,
+    topic: "system"
+  }
+];
 
-const createANewTopic = (_: any, res: any) => {
-  client.createTopics(topicsToCreate , (err: any, result: any) => {
-   // result is an array of any errors if a given topic could not be created
-   if (err) throw new Error(err);
+const openTopics = topic => {
+  client.createTopics(topic, (err: any, result: any) => {
+    // result is an array of any errors if a given topic could not be created
+    if (err) {
+      throw new Error(err);
+    }
 
-   console.log(result);
-   successfull(res);
+    process.stdout.write("\nTopic creation logs by Producer:\n");
+    process.stdout.write(JSON.stringify(result, null, " ") + "\n");
+    //successfull(res);
   });
 }
+
+// Generate a topics
+openTopics(topicsToCreate);
+
+// Send a Topic
+const sendTopic = (_: any, res: any) => {
+  producer.send(payloads, (err: any, data: any) => {
+    if (err) {
+      throw new Error(err);
+    }
+
+    process.stdout.write("\nSend topic logs by Producer:\n");
+    process.stdout.write(JSON.stringify(data, null, " ") + "\n");
+    successfull(res);
+  });
+};
+
+
+const createANewTopic = (_: any, res: any) => {
+  process.stdout.write('success');
+};
 
 export { sendTopic, createANewTopic };

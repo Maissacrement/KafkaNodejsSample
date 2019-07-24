@@ -1,3 +1,4 @@
+/*
 import {IProducerConfig, ProducerConfig, SimpleProducer} from "kafka-typescript-v2"
 
 const rdkafka = require("node-rdkafka")
@@ -25,4 +26,4 @@ const sendTopic = (_: any, res: any) => {
   res.send("yes");
 }
 
-export default sendTopic;
+export default sendTopic;*/

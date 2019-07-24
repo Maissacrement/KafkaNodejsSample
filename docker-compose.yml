@@ -1,0 +1,30 @@
+version: "3"
+services:
+  nodejs:
+    build: ./monitoringApp
+    network_mode: host
+    depends_on:
+      - zookeeper
+      - kafka_server
+    ports:
+      - 8082:8082
+    restart: always
+  kafka_server:
+    build: ./kafka
+    restart: always
+    container_name: "kafkaserver"
+    command: ["kafka-server-start.sh", "../config/server.properties"]
+    network_mode: host
+    depends_on:
+      - zookeeper
+    ports:
+      - 9092:9092
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  zookeeper:
+    build: ./kafka
+    network_mode: host
+    container_name: "zookeeper"
+    command: ["zookeeper-server-start.sh", "../config/zookeeper.properties"]
+    ports:
+      - 2181:2181

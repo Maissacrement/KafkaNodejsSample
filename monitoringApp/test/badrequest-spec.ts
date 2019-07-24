@@ -18,9 +18,10 @@ chai.use(chaiHttp);
 describe("BadRequest test", () => {
   it("Display an error for all path not specified", done => {
     supertest(app)
-      .get("/user")
+      .get("/dfezfezfezfezdza")
       .then(value => {
         expect(value.body).to.be.a("object");
+        console.log(expect(value.body));
 
         done();
       })

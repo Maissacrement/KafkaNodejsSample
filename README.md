@@ -8,3 +8,8 @@ Techno :
   - `Typescript`
   - `mocha`
 ```
+```bash
+Requirement:
+- Docker
+- Nodejs 10
+```

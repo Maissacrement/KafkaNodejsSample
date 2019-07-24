@@ -9,11 +9,12 @@ WORKDIR /app
 
 # INIT DOCKER PROJECT
 COPY package.json .
-RUN yarn
+RUN apk update && \
+    apk add bash && \
+    yarn
 
 # ADD REPO ON DOCKER
 COPY . .
 
-# ASSIGN PORT AND FUNCTIONNALITY
-EXPOSE 8081
-RUN ["yarn", "test"]
+# FUNCTIONNALITY
+ENTRYPOINT ["yarn", "dev:nodebug"]
