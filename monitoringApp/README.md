@@ -1,10 +1,13 @@
 # Micro service node
 
 ## Node
+
+```bash
 run server : `yarn dev`
 lint : `yarn lint`
 test : `yarn test`
 build : `yarn build`
+```
 
 ## Run my micro service on docker
 
