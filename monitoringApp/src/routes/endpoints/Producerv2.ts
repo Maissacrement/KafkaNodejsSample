@@ -65,13 +65,10 @@ const sendTopic = (_: any, res: any) => {
 };
 
 
-const createANewTopic = (err: any, res: any) => {
-  if(err) {
-    throw new Error(err);
-  }
-
+const createANewTopic = (_: any, res: any) => {
   process.stdout.write('success');
   res.end();
+
 };
 
 export { sendTopic, createANewTopic };
