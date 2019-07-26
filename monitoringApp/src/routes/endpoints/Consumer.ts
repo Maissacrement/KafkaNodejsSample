@@ -3,6 +3,10 @@ const Consumer = kafka.Consumer;
 const client = new kafka.KafkaClient({ kafkaHost: "127.0.0.1:9092" });
 
 const receiveMsgFrom1Topic = (err: any, res: any) => {
+  if(err){
+    throw new Error(err);
+  }
+
   const consumer = new Consumer(
     client,
     [{ topic: "hello-world", partition: 0 }],

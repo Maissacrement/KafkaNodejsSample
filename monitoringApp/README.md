@@ -1,10 +1,22 @@
-# KafkaNodejsSample
+# Micro service node
 
 ## Node
 run server : `yarn dev`
+lint : `yarn lint`
+test : `yarn test`
+build : `yarn build`
 
-## Start Kafka
+## Run my micro service on docker
 
 ```bash
-  cmd: `docker-compose up --build`
+BUILD: `docker build -t nodeforkafka .`
+RUN: `docker run -p 8082:8082 -ti -d --name nodeforkafka nodeforkafka`
+
+START: `docker start nodeforkafka`
+STOP: `docker stop nodeforkafka`
+REMOVE: `docker rm nodeforkafka`
 ```
+
+## RUN NODE SERVICE
+cmd: `docker exec -i -t nodeforkafka yarn dev`
+

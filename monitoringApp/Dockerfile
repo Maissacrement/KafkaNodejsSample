@@ -10,7 +10,8 @@ WORKDIR /app
 # INIT DOCKER PROJECT
 COPY package.json .
 RUN apk update && \
-    apk add bash && \
+    apk add bash python \
+    g++ make && \
     yarn
 
 # ADD REPO ON DOCKER

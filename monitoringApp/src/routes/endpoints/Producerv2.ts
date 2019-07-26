@@ -20,7 +20,7 @@ const successfull = (res: any) => {
 };
 
 // Test create manually topic
-const topicsToCreate: any = [
+const topicsToCreate: Array<any> = [
   {
     messages: "hi",
     partitions: 3,
@@ -35,7 +35,7 @@ const topicsToCreate: any = [
   }
 ];
 
-const openTopics = topic => {
+const openTopics = (topic: Array<any>) => {
   client.createTopics(topic, (err: any, result: any) => {
     // result is an array of any errors if a given topic could not be created
     if (err) {
@@ -65,8 +65,13 @@ const sendTopic = (_: any, res: any) => {
 };
 
 
-const createANewTopic = (_: any, res: any) => {
+const createANewTopic = (err: any, res: any) => {
+  if(err) {
+    throw new Error(err);
+  }
+
   process.stdout.write('success');
+  res.end();
 };
 
 export { sendTopic, createANewTopic };
