@@ -62,10 +62,6 @@ export default class Producer {
       });
   }
 
-  public greet(): string {
-    return `Bonjour, ${this.KeyedMessage}, ${this.Producer}, ${this.client}!`;
-  }
-
   private getProducer(): kafka.Producer {
     return new this.Producer(this.client);
   }
