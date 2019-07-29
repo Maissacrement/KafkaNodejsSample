@@ -4,7 +4,7 @@ const client = new kafka.KafkaClient({ kafkaHost: "127.0.0.1:9092" });
 
 const consumer = new Consumer(
   client,
-  [{ topic: "hello-world", partition: 0 }],
+  [{ topic: "first-topic" }],
   {
     autoCommit: false
   }
@@ -15,3 +15,10 @@ consumer.on("message", async response => {
   process.stdout.write(JSON.stringify(response, null, " ") + "\n");
 
 });
+
+consumer.on('error', (err: any) => {
+  process.stdout.write(
+    JSON.stringify({
+      'error': err
+    }, null, " ") + "\n");
+})
